@@ -1,29 +1,45 @@
-import { render } from "@testing-library/react";
-import React,{useState} from "react";
 
-function TaskList() {
+import React,{useState} from "react";
+import TaskForm from './TaskForm';
+import Task from './Task';
+
+function TaskList(task) {
     const [tasks, setTasks] = useState([]);
   
-    function addTask(newTask) {
+    function addTask(title,description) {
+     const newTask = { id: Date.now(), title, description };
       setTasks([...tasks, newTask]);
+     
     }
   
-    function deleteTask(taskIndex) {
-      const updatedTasks = tasks.filter((task, index) => index !== taskIndex);
+    const deleteTask = (taskId) => {{
+      const updatedTasks = tasks.filter((task) => task.id !== taskId);
       setTasks(updatedTasks);
-    }
-  
+    }}
+    
+    const editTask = (taskId, title, description) => {
+      const updatedTasks = tasks.map((task) => {
+        if (task.id === taskId) {
+          return { ...task, title, description };
+        } else {
+          return task;
+        }
+      });
+      setTasks(updatedTasks);
+    };
     return (
       <div>
+        <TaskForm addTask={addTask} />
         <h1>Task List</h1>
-        <ul>
-          {tasks.map((task, index) => (
-            <li key={index}>
-              {task}
-              <button onClick={() => deleteTask(index)}>Delete</button>
-            </li>
-          ))}
-        </ul>
+  
+        <div>
+        {tasks.map((task) => (
+            <div key={task.id}>
+              <Task id={task.id} title={task.title} description={task.description} editTask={editTask} deleteTask={deleteTask}/>
+            </div>
+))}
+      </div>
+        
         <form onSubmit={(event) => {
           event.preventDefault();
           const newTask = event.target.elements.taskInput.value;

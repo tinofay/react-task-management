@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function TaskForm() {
+function TaskForm(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
@@ -14,15 +14,16 @@ function TaskForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Handle form submission logic here
-    console.log(`Title: ${title} Description: ${description}`);
+    
+    props.addTask(title,description);
+    event.target.reset();
   }
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <label htmlFor="title">Title:</label>
-        <input
+        <input name='title'
           id="title"
           type="text"
           value={title}
@@ -30,7 +31,7 @@ function TaskForm() {
         />
 
         <label htmlFor="description">Description:</label>
-        <textarea
+        <textarea name='description'
           id="description"
           value={description}
           onChange={handleDescriptionChange}
