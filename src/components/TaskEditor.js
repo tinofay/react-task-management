@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Styles from './styles.module.css';
 
 function TaskEditor(props) {
   
@@ -17,23 +18,15 @@ function TaskEditor(props) {
       <h2>Edit Task</h2>
       <form onSubmit={handleSubmit}>
         <label>
-          Title:
-          <input
-            type="text"
-            value={title}
-            onChange={(event) => setTitle(event.target.value)}
-          />
+          Title: <input className={Styles.textbox} type="text" value={title} onChange={(event) => setTitle(event.target.value)}/>
         </label>
         <br />
         <label>
           Description:
-          <textarea
-            value={description}
-            onChange={(event) => setDescription(event.target.value)}
-          />
+          <textarea className={Styles.textbox} value={description} onChange={(event) => setDescription(event.target.value)} />
         </label>
         <br />
-        <button type="submit">Save</button>
+        <button className={Styles.btn_primary} type="submit">Save</button>
       </form>
     </div>
   );

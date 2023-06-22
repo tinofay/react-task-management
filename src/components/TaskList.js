@@ -2,6 +2,7 @@
 import React,{useState} from "react";
 import TaskForm from './TaskForm';
 import Task from './Task';
+import Styles from './styles.module.css';
 
 function TaskList(task) {
     const [tasks, setTasks] = useState([]);
@@ -18,7 +19,9 @@ function TaskList(task) {
     }}
     
     const editTask = (taskId, title, description) => {
+      console.log(taskId)
       const updatedTasks = tasks.map((task) => {
+
         if (task.id === taskId) {
           return { ...task, title, description };
         } else {
@@ -32,23 +35,28 @@ function TaskList(task) {
         <TaskForm addTask={addTask} />
         <h1>Task List</h1>
   
-        <div>
-        {tasks.map((task) => (
-            <div key={task.id}>
-              <Task id={task.id} title={task.title} description={task.description} editTask={editTask} deleteTask={deleteTask}/>
-            </div>
-))}
+        <div className={Styles.container}>
+        <table>
+          <thead>
+            <tr>
+              <th>Task</th>
+              <th>Description</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tasks.map((task) => (
+              <tr key={task.id}>
+                  <td>{task.title}</td>
+                  <td>{task.description}</td>
+                  <td>
+                    <Task id={task.id} title={task.title} description={task.description} editTask={editTask} deleteTask={deleteTask}/>
+                  </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
-        
-        <form onSubmit={(event) => {
-          event.preventDefault();
-          const newTask = event.target.elements.taskInput.value;
-          addTask(newTask);
-          event.target.reset();
-        }}>
-          <input type="text" name="taskInput" />
-          <button type="submit">Add Task</button>
-        </form>
       </div>
     );
   }

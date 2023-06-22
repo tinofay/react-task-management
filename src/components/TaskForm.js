@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Styles from './styles.module.css';
 
 function TaskForm(props) {
   const [title, setTitle] = useState("");
@@ -20,24 +21,27 @@ function TaskForm(props) {
   }
 
   return (
-    <div>
+    <div className={Styles.container}>
+      <h2>Task Form</h2>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="title">Title:</label>
-        <input name='title'
-          id="title"
-          type="text"
-          value={title}
-          onChange={handleTitleChange}
-        />
-
-        <label htmlFor="description">Description:</label>
-        <textarea name='description'
-          id="description"
-          value={description}
-          onChange={handleDescriptionChange}
-        />
-
-        <button type="submit">Add Task</button>
+        <div className={Styles.row}>
+          <label htmlFor="title">Title:</label>
+          <input className={Styles.textbox} name='title'
+            id="title"
+            type="text"
+            value={title}
+            onChange={handleTitleChange}
+          />
+          &nbsp;
+          <label htmlFor="description">Description:</label>
+          <textarea className={Styles.textbox} name='description'
+            id="description"
+            value={description}
+            onChange={handleDescriptionChange}
+          />
+        </div>
+        <br/>
+        <button className={Styles.btn_primary} type="submit">Add Task</button>
       </form>
     </div>
   );
