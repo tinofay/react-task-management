@@ -17,8 +17,12 @@ function TaskForm(props) {
     event.preventDefault();
     
     props.addTask(title,description);
-    event.target.reset();
-  }
+    setTitle(event.target.value="");
+    setDescription(event.target.value="");
+    //event.target.reset;
+
+
+    }
 
   return (
     <div className={Styles.container}>
