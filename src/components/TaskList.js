@@ -5,6 +5,7 @@ import Task from './Task';
 import Styles from './styles.module.css';
 
 function TaskList(task) {
+  
     const [tasks, setTasks] = useState([]);
   
     function addTask(title,description) {
@@ -17,7 +18,19 @@ function TaskList(task) {
       const updatedTasks = tasks.filter((task) => task.id !== taskId);
       setTasks(updatedTasks);
     }}
-    
+
+   
+    const id =useId();
+
+    function addTask(title,description) {
+
+     const newTask = { id, title, description };
+
+      setTasks([...tasks, newTask]);
+
+    }
+
+
     const editTask = (taskId, title, description) => {
       console.log(taskId)
       const updatedTasks = tasks.map((task) => {
@@ -30,6 +43,7 @@ function TaskList(task) {
       });
       setTasks(updatedTasks);
     };
+    
     return (
       <div>
         <TaskForm addTask={addTask} />
