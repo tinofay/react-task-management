@@ -19,9 +19,6 @@ function TaskForm(props) {
     props.addTask(title,description);
     setTitle(event.target.value="");
     setDescription(event.target.value="");
-    //event.target.reset;
-
-
     }
 
   return (
@@ -35,6 +32,8 @@ function TaskForm(props) {
             type="text"
             value={title}
             onChange={handleTitleChange}
+            required
+            placeholder="Enter a task title" 
           />
           &nbsp;
           <label htmlFor="description">Description:</label>
@@ -42,6 +41,8 @@ function TaskForm(props) {
             id="description"
             value={description}
             onChange={handleDescriptionChange}
+            required 
+            placeholder="Enter a task description"
           />
         </div>
         <br/>
